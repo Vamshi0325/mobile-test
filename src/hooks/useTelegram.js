@@ -5,24 +5,20 @@ export function useTelegram() {
 
   useEffect(() => {
     const checkEnvironment = () => {
-      // 1. Check if running in Telegram WebApp
-      const isTelegramWebApp = window.Telegram?.WebApp?.initData !== undefined;
+      // 1. Must have Telegram WebApp injected
+      if (!window.Telegram?.WebApp?.initData) return false;
 
-      if (!isTelegramWebApp) return false;
+      // 2. Must be launched from official Telegram mobile apps
+      const platform = window.Telegram.WebApp.platform;
+      if (platform !== "android" && platform !== "ios") return false;
 
-      // 2. Check if running on a mobile device (not desktop/tablet)
-      const isMobile =
-        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        );
+      // 3. Must be in Telegram's WebView (not browser)
+      if (!window.Telegram.WebApp.isWebView) return false;
 
-      if (!isMobile) return false;
+      // 4. Additional verification for WebApp version
+      const version = window.Telegram.WebApp.version;
+      if (!version || typeof version !== "string") return false;
 
-      // 3. Check if running in Telegram Desktop (block it)
-      const isTelegramDesktop = navigator.userAgent.includes("TelegramDesktop");
-      if (isTelegramDesktop) return false;
-
-      // If all checks pass, it's a valid Telegram mobile mini app
       return true;
     };
 
