@@ -12,20 +12,39 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-      window.onload = function () {
-        var telegramWebApp = window.Telegram.WebApp;
-        if (!telegramWebApp) {
-          // Show a message to users if they try to access the app outside Telegram
-          document.body.innerHTML =
-            "<h1>This app is only available in the Telegram app.</h1>";
-        }
-      };
-    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="wrap">
+      <div id="content"></div>
+    </div>
+
+    <script src="https://unpkg.com/@telegram-apps/sdk@1.0.0/dist/index.iife.js"></script>
+    <script>
+      (function () {
+        var { retrieveLaunchParams, postEvent } = window.telegramApps.sdk;
+        var lp = retrieveLaunchParams();
+
+        // Check if the platform is Telegram Mini App
+        if (
+          ["macos", "tdesktop", "weba", "web", "webk"].includes(lp.platform)
+        ) {
+          // If it's a Telegram Mini App, display the welcome message
+          document.getElementById("content").innerHTML =
+            "Welcome to Telegram Mini App!";
+        } else {
+          // If not a Telegram Mini App, display the alternative message
+          document.getElementById("content").innerHTML =
+            "This application is only available in Telegram Mini App. Please open this bot in Telegram Mini App.";
+        }
+      })();
+    </script>
   </body>
 </html>
