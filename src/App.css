@@ -1,4 +1,4 @@
-/* Telegram App Styles */
+/* Telegram App Container */
 .telegram-app {
   max-width: 600px;
   margin: 0 auto;
@@ -8,12 +8,13 @@
 
 .telegram-app h1 {
   color: #0088cc;
+  margin-bottom: 16px;
 }
 
 /* Unsupported Platform Styles */
 .unsupported-platform {
   max-width: 500px;
-  margin: 50px auto;
+  margin: 40px auto;
   padding: 30px;
   text-align: center;
   background: white;
@@ -24,12 +25,12 @@
 .store-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .store-button {
-  padding: 12px;
+  padding: 12px 24px;
   color: white;
   text-decoration: none;
   border-radius: 8px;
