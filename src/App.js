@@ -34,24 +34,30 @@ const App = () => {
       const WebApp = window.Telegram?.WebApp;
       const ua = navigator.userAgent || "";
 
-      // 1️⃣ If the WebApp object is missing (e.g., web.telegram.org, any browser), block access
+      console.log("🚦 WebApp:", WebApp);
+      console.log("🚦 User-Agent:", ua);
+
+      // 1️⃣ If the WebApp object is missing (i.e., web.telegram.org or any browser), block access
       if (!WebApp) {
+        console.log("🚫 WebApp not found. Blocking access.");
         return setIsValidTelegram(false);
       }
 
-      // 2️⃣ If it’s not flagged as Android or iOS, block (also blocks desktop)
+      // 2️⃣ Check the platform. Ensure it's either Android or iOS (for the Telegram Mini App).
       if (WebApp.platform !== "android" && WebApp.platform !== "ios") {
+        console.log("🚫 Unsupported platform detected. Blocking access.");
         return setIsValidTelegram(false);
       }
 
-      // 3️⃣ Extra safety: UA must include the official Telegram user-agent token
+      // 3️⃣ Extra safety check on the user-agent to ensure it is an official Telegram client.
       if (!ua.includes("Telegram-Android/") && !ua.includes("Telegram-iOS/")) {
+        console.log("🚫 Invalid User-Agent. Blocking access.");
         return setIsValidTelegram(false);
       }
 
-      // 🎉 If we pass all checks, we're in the official Telegram Mini App (either Android or iOS)
+      // 🎉 If the app passes the checks, allow access.
       setIsValidTelegram(true);
-      WebApp.ready(); // Ready to use the WebApp SDK
+      WebApp.ready(); // Proceed with WebApp SDK logic.
     };
 
     checkTelegram();
