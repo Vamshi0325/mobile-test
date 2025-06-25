@@ -6,7 +6,6 @@ export function useTelegram() {
   useEffect(() => {
     const checkTelegram = () => {
       const tg = window.Telegram?.WebApp;
-
       console.log("✅ Telegram SDK:", tg);
       if (!tg) return false;
 
@@ -18,10 +17,10 @@ export function useTelegram() {
       console.log("🔍 Telegram initData:", initData);
       console.log("🔍 isWebView:", isWebView);
 
-      // All strict checks
+      // Fix: Only block if isWebView is explicitly false
       return (
         !!initData &&
-        isWebView === true &&
+        isWebView !== false &&
         (platform === "android" || platform === "ios")
       );
     };
@@ -32,12 +31,10 @@ export function useTelegram() {
       setIsValidTelegram(result);
     };
 
-    // Retry after short delay to let Telegram WebApp init
     const timeout = setTimeout(() => {
       initializeCheck();
     }, 300);
 
-    // Optional: use Telegram's onEvent if supported
     if (window.Telegram?.WebApp?.onEvent) {
       window.Telegram.WebApp.onEvent("ready", initializeCheck);
     }
