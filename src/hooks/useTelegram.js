@@ -17,10 +17,22 @@ export function useTelegram() {
       console.log("🔍 Telegram initData:", initData);
       console.log("🔍 isWebView:", isWebView);
 
-      // Fix: Only block if isWebView is explicitly false
+      // Check User-Agent for mobile Telegram app only
+      const userAgent = navigator.userAgent;
+      console.log("🔍 User-Agent:", userAgent);
+
+      // Define User-Agent patterns for official Telegram mobile apps
+      const isTelegramMobile =
+        userAgent.includes("Telegram") &&
+        (userAgent.includes("Android") || userAgent.includes("iPhone"));
+
+      console.log("🔍 Is Official Telegram App (mobile)?", isTelegramMobile);
+
+      // Ensure it is the official Telegram mobile app, WebView, and platform checks
       return (
         !!initData &&
         isWebView !== false &&
+        isTelegramMobile &&
         (platform === "android" || platform === "ios")
       );
     };
