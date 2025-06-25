@@ -2,17 +2,19 @@ export default function UnsupportedPlatform() {
   const isMobile = /Android|iPhone|iPod/i.test(navigator.userAgent);
 
   return (
-    <div className="unsupported-container">
-      <h1>🔒 Restricted Access</h1>
-      <p>
-        This service only works within the{" "}
-        <strong>official Telegram mobile app</strong>.
-      </p>
+    <div className="unsupported-platform">
+      <h1>🔒 Incorrect Access Method</h1>
+      <p>This bot only works within the official Telegram mobile app.</p>
 
       {isMobile ? (
         <>
-          <p>Download Telegram from:</p>
-          <div className="download-buttons">
+          <p>Try opening this link from:</p>
+          <ol>
+            <li>The Telegram app on your phone</li>
+            <li>Your bot's menu button</li>
+          </ol>
+          <p>Or download Telegram:</p>
+          <div className="store-buttons">
             <a
               href="https://apps.apple.com/app/telegram-messenger/id686449807"
               className="store-button ios"
@@ -28,7 +30,7 @@ export default function UnsupportedPlatform() {
           </div>
         </>
       ) : (
-        <p>Please use a mobile device to access this service.</p>
+        <p>Please use a mobile device to access this bot.</p>
       )}
     </div>
   );

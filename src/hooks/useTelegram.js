@@ -5,19 +5,17 @@ export function useTelegram() {
 
   useEffect(() => {
     const checkEnvironment = () => {
-      // 1. Must have Telegram WebApp injected
-      if (!window.Telegram?.WebApp?.initData) return false;
+      // 1. Check if Telegram WebApp is available
+      if (!window.Telegram?.WebApp) return false;
 
-      // 2. Must be launched from official Telegram mobile apps
-      const platform = window.Telegram.WebApp.platform;
-      if (platform !== "android" && platform !== "ios") return false;
-
-      // 3. Must be in Telegram's WebView (not browser)
+      // 2. Check if running in Telegram's WebView
       if (!window.Telegram.WebApp.isWebView) return false;
 
-      // 4. Additional verification for WebApp version
-      const version = window.Telegram.WebApp.version;
-      if (!version || typeof version !== "string") return false;
+      // 3. Check platform (should be android/ios but not strictly required)
+      const platform = window.Telegram.WebApp.platform || "";
+
+      // 4. Check initData (proves Telegram origin)
+      if (!window.Telegram.WebApp.initData) return false;
 
       return true;
     };

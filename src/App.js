@@ -5,13 +5,20 @@ import "./App.css";
 function App() {
   const { isValidTelegramMobile } = useTelegram();
 
+  // Debug output (remove in production)
+  console.log("Telegram check:", {
+    isWebView: window.Telegram?.WebApp?.isWebView,
+    platform: window.Telegram?.WebApp?.platform,
+    initData: !!window.Telegram?.WebApp?.initData,
+  });
+
   if (!isValidTelegramMobile) {
     return <UnsupportedPlatform />;
   }
 
   return (
-    <div className="telegram-app-container">
-      <h1>Welcome to Our Service!</h1>
+    <div className="telegram-app">
+      <h1>Welcome to Our Bot! 🎉</h1>
       <p>You're using the official Telegram mobile app.</p>
 
       {window.Telegram?.WebApp?.initDataUnsafe?.user && (

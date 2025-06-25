@@ -1,14 +1,13 @@
-/* Main App Styles */
-.telegram-app-container {
+/* Telegram App Styles */
+.telegram-app {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
 }
 
-.telegram-app-container h1 {
+.telegram-app h1 {
   color: #0088cc;
-  margin-bottom: 15px;
 }
 
 /* Unsupported Platform Styles */
@@ -17,38 +16,27 @@
   margin: 50px auto;
   padding: 30px;
   text-align: center;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.download-buttons {
+.store-buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
 }
 
-.app-store-button,
-.play-store-button {
-  display: inline-block;
+.store-button {
   padding: 12px 25px;
   color: white;
   text-decoration: none;
   border-radius: 8px;
   font-weight: 500;
-  transition: transform 0.2s;
 }
 
-.app-store-button {
+.store-button.ios {
   background: #007aff;
 }
 
-.play-store-button {
+.store-button.android {
   background: #3ddc84;
-}
-
-.app-store-button:hover,
-.play-store-button:hover {
-  transform: translateY(-2px);
 }
