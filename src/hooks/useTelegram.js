@@ -29,6 +29,14 @@ export function useTelegram() {
       const result = checkTelegram();
       console.log("🚦 isValidTelegram:", result);
       setIsValidTelegram(result);
+
+      // If it's the official Telegram app, expand the WebApp
+      if (result) {
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
+          tg.expand(); // Expands the WebApp within the available screen space
+        }
+      }
     };
 
     const timeout = setTimeout(() => {
