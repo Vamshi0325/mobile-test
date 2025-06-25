@@ -35,6 +35,7 @@ const App = () => {
         alignItems: "center",
         height: "100vh",
         color: "black",
+        fontSize: "40px",
       }}
     >
       App
