@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
 
 export function useTelegram() {
-  const [isTelegram, setIsTelegram] = useState(false);
+  const [isValidTelegramMobile, setIsValidTelegramMobile] = useState(false);
 
   useEffect(() => {
-    const checkTelegram = () => {
-      // Check for Telegram WebApp object
-      if (window.Telegram?.WebApp?.initData) {
-        return true;
-      }
+    const checkEnvironment = () => {
+      // 1. Check if running in Telegram WebApp
+      const isTelegramWebApp = window.Telegram?.WebApp?.initData !== undefined;
 
-      // Check for Telegram URL parameters
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("tgWebAppVersion") || params.get("tgWebAppPlatform")) {
-        return true;
-      }
+      if (!isTelegramWebApp) return false;
 
-      // Check user agent (fallback)
-      const userAgent = navigator.userAgent.toLowerCase();
-      if (userAgent.includes("telegram")) {
-        return true;
-      }
+      // 2. Check if running on a mobile device (not desktop/tablet)
+      const isMobile =
+        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
 
-      return false;
+      if (!isMobile) return false;
+
+      // 3. Check if running in Telegram Desktop (block it)
+      const isTelegramDesktop = navigator.userAgent.includes("TelegramDesktop");
+      if (isTelegramDesktop) return false;
+
+      // If all checks pass, it's a valid Telegram mobile mini app
+      return true;
     };
 
-    setIsTelegram(checkTelegram());
+    setIsValidTelegramMobile(checkEnvironment());
   }, []);
 
-  return { isTelegram };
+  return { isValidTelegramMobile };
 }
