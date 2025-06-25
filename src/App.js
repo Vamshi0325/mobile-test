@@ -6,18 +6,18 @@ function App() {
   const { isValidTelegram } = useTelegram();
 
   if (!isValidTelegram) {
+    console.warn("🚫 Unsupported Platform Detected");
     return <UnsupportedPlatform />;
   }
 
-  // ONLY SHOWN IN OFFICIAL TELEGRAM MOBILE APPS
+  const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+
   return (
     <div className="telegram-app">
       <h1>Welcome to Our Bot! 🎉</h1>
       <p>You're using the official Telegram app.</p>
 
-      {window.Telegram?.WebApp?.initDataUnsafe?.user && (
-        <p>Hello, {window.Telegram.WebApp.initDataUnsafe.user.first_name}!</p>
-      )}
+      {tgUser && <p>Hello, {tgUser.first_name}!</p>}
     </div>
   );
 }

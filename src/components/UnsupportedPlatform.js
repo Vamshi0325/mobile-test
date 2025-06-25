@@ -13,12 +13,16 @@ export default function UnsupportedPlatform() {
         <a
           href="https://apps.apple.com/app/telegram-messenger/id686449807"
           className="store-button ios"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Download for iOS
         </a>
         <a
           href="https://play.google.com/store/apps/details?id=org.telegram.messenger"
           className="store-button android"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Download for Android
         </a>
