@@ -24,13 +24,22 @@
 
 // export default App;
 
-
-import React from 'react'
+import React from "react";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        color: "black",
+      }}
+    >
+      App
+    </div>
+  );
+};
 
-export default App
+export default App;
