@@ -78,14 +78,13 @@
           document.body.innerHTML =
             "<h1>This app is only available in the Telegram mobile app.</h1>";
         } else {
-          document.body.innerHTML =
-            "<h1>Welcome to Telegram Mini App</h1>";
+          document.getElementById("root").style.display = "block";
         }
       };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" style="display: none"></div>
   </body>
 </html>
