@@ -39,17 +39,17 @@ const App = () => {
         return setIsValidTelegram(false);
       }
 
-      // 2️⃣ If it’s not flagged as Android, block (also blocks iOS & desktop)
-      if (WebApp.platform !== "android") {
+      // 2️⃣ If it’s not flagged as Android or iOS, block (also blocks desktop)
+      if (WebApp.platform !== "android" && WebApp.platform !== "ios") {
         return setIsValidTelegram(false);
       }
 
-      // 3️⃣ Extra safety: UA must include the official “Telegram-Android/” token
-      if (!ua.includes("Telegram-Android/")) {
+      // 3️⃣ Extra safety: UA must include the official Telegram user-agent token
+      if (!ua.includes("Telegram-Android/") && !ua.includes("Telegram-iOS/")) {
         return setIsValidTelegram(false);
       }
 
-      // 🎉 If we pass all checks, we're in the official Android Telegram Mini App
+      // 🎉 If we pass all checks, we're in the official Telegram Mini App (either Android or iOS)
       setIsValidTelegram(true);
       WebApp.ready(); // Ready to use the WebApp SDK
     };
