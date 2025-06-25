@@ -77,12 +77,13 @@
           // Redirect or show an alert if the app is accessed in a browser or Telegram Web
           document.body.innerHTML =
             "<h1>This app is only available in the Telegram mobile app.</h1>";
+        } else {
+          document.body.innerHTML = "<div id='root'></div>";
         }
       };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
   </body>
 </html>
