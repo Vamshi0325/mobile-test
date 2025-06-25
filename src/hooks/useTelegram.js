@@ -29,14 +29,6 @@ export function useTelegram() {
       const result = checkTelegram();
       console.log("🚦 isValidTelegram:", result);
       setIsValidTelegram(result);
-
-      // If it's the official Telegram app, expand the screen to full
-      if (result) {
-        const tg = window.Telegram?.WebApp;
-        if (tg) {
-          tg.requestFullscreen(); // Request fullscreen mode
-        }
-      }
     };
 
     const timeout = setTimeout(() => {
