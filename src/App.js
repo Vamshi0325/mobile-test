@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useTelegram } from "./hooks/useTelegram";
 
 function App() {
+  const { isTelegram } = useTelegram();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isTelegram ? (
+        <h1>Welcome to Bot</h1>
+      ) : (
+        <div>
+          <h1>Open Your Bot in Telegram mobile mini application</h1>
+          <p>
+            Please open this link in the Telegram mobile app to use the bot.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
